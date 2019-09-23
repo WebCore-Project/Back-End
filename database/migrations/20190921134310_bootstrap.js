@@ -19,6 +19,20 @@ exports.up = function(knex) {
         tbl.text('description', 1024);
     })
     .createTable('users_vacation', tbl => {
+        tbl.increments('id');
+        tbl.integer('user_id')
+            .unsigned()
+            .notNullable()
+            .references('id')
+            .inTable('users');
+        tbl.integer('vacation_id')
+            .unsigned()
+            .notNullable()
+            .references('id')
+            .inTable('vacations');
+        tbl.text('notes', 1024);   
+    })
+    .createTable('todo', tbl => {
         tbl.increments();
         tbl.integer('user_id')
             .unsigned()
@@ -30,7 +44,8 @@ exports.up = function(knex) {
             .notNullable()
             .references('id')
             .inTable('vacations');
-        tbl.text('notes', 1024);    
+        tbl.text('list', 5000).notNullable();
+        tbl.timestamps(true, true);
     })
     .createTable('vacation_comments', tbl => {
         tbl.increments();
@@ -43,15 +58,17 @@ exports.up = function(knex) {
             .unsigned()
             .notNullable()
             .references('id')
-            .inTable('vacations');
-        tbl.text('comments', 1024);
-        tbl.timestamps(true);
+            .inTable('vacations')
+            .onDelete('CASCADE')
+        tbl.text('comments', 5000).notNullable();
+        tbl.timestamps(true, true);
     });
 };
 
 exports.down = function(knex) {
   return knex.schema
         .dropTableIfExists('vacation_comments')
+        .dropTableIfExists('todo')
         .dropTableIfExists('users_vacation')
         .dropTableIfExists('vacations')
         .dropTableIfExists('users');
