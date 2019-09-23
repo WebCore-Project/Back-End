@@ -20,7 +20,8 @@ exports.up = function(knex) {
     })
     .createTable('users_vacation', tbl => {
         tbl.increments('id');
-        tbl.integer('user_id')
+        tbl.foreign('user_id')
+            .integer()
             .unsigned()
             .notNullable()
             .references('id')
