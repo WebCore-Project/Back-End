@@ -114,7 +114,7 @@ router.put('/:vacId/update', restricted, validateUserVacLink, validateVacation, 
 });
 
 router.use('/:vacId/comments', commentRouter);
-router.use('/:vacId/todos', todoRouter);
+router.use('/:vacId/suggestions', todoRouter);
 
 //middleware
 

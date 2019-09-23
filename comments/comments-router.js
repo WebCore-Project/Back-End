@@ -5,12 +5,13 @@ const UsersVacation = require('../user-vacations/user-vacation-model.js')
 const Comments = require('./comments-model.js');
 
 router.post('/add', restricted, validateUserVacLink, (req, res) => {
-    const { comments, username } = req.body;
-    if (!comments) {
+    const { comment} = req.body;
+    const username = rec.user;
+    if (!comment) {
         return res.status(400).json({ message: 'Comment required!' });
     }
     Users.findIdFromName(username).then(userId => {
-        Comments.add(userId, req.vacId, comments).then(userVacID => {
+        Comments.add(userId, req.vacId, comment).then(userVacID => {
             res.status(201).json(userVacID)
         })
             .catch(err => {

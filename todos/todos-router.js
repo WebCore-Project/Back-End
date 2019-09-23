@@ -5,12 +5,13 @@ const UsersVacation = require('../user-vacations/user-vacation-model.js')
 const Todos = require('./todos-model.js');
 
 router.post('/add', restricted, validateUserVacLink, (req, res) => {
-    const { list, username } = req.body;
-    if (!list) {
+    const { suggestion } = req.body;
+    const username = rec.user
+    if (!suggestion) {
         return res.status(400).json({ message: 'Todo required!' });
     }
     Users.findIdFromName(username).then(userId => {
-        Todos.add(userId, req.vacId, list).then(userVacID => {
+        Todos.add(userId, req.vacId, suggestion).then(userVacID => {
             res.status(201).json(userVacID)
         })
             .catch(err => {
