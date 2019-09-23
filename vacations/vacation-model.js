@@ -2,7 +2,8 @@ const db = require('../database/db-config.js');
 
 module.exports = {
     add,
-    find
+    find,
+    update
 };
 
 function add(vac) {
@@ -11,4 +12,8 @@ function add(vac) {
 
 function find(){
     return db('vacations')
+}
+
+function update(vacId, change) {
+    return db('vacations').where({'id': vacId}).update(change)
 }

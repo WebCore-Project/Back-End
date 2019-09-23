@@ -27,7 +27,12 @@ async function add(user) {
 }
 
 async function findIdFromName(username) {
-    const {id} = await db('users').where("username", username).select('id').first();
-    console.log('here',id)
-    return id;
+    const userId = await db('users').where("username", username).select('id').first();
+    console.log('id in usermodel', userId)
+    if(userId) {
+        const {id} = userId;
+        return id;
+    } else {
+        return false;
+    }
 }

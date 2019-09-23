@@ -15,7 +15,7 @@ server.use(express.json());
 
 server.use('/api/auth', authRouter);
 server.use('/api/vacations', addVacRouter);
-server.use('/api/vacations', vacationRouter);
+server.use('/api/usersvacations', vacationRouter);
 server.use('/api', usersRouter);
 
 module.exports = server;
