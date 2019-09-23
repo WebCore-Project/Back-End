@@ -29,7 +29,7 @@ function findById(id) {
 }
 
 async function add(userId, vacationId) {
-    const [id] = await db('users_vacation').insert({user_id: userId , vacation_id: vacationId});
+    const [id] = await db('users_vacation').insert({user_id: userId , vacation_id: vacationId}, 'id');
     return findById(id)
 }
 

@@ -4,6 +4,8 @@ const Vacations = require('./vacation-model.js');
 const Users = require('../users/users-model.js');
 const UsersVacation = require('../user-vacations/user-vacation-model.js');
 const restricted = require('../auth/auth-middleware.js');
+const commentRouter = require('../comments/comments-router.js');
+const todoRouter = require('../todos/todos-router.js');
 
 router.get('/', restricted, (req, res) => {
     const {username} = req.user;
@@ -35,10 +37,10 @@ router.post('/add', restricted, validateVacation, (req, res) => {
     const { username } = req.user;
     Vacations.add(vac)
             .then(vacation => {
-                const [vacId] = vacation;
+                const vacId = vacation.id;
                 Users.findIdFromName(username).then(userId => {
                     UsersVacation.add(userId, vacId).then(userVacID => {
-                        res.status(201).json(userVacID)
+                        res.status(201).json(vacation)
                     })
                     .catch(err => {
                         console.log('err 1',err)
@@ -111,6 +113,8 @@ router.put('/:vacId/update', restricted, validateUserVacLink, validateVacation, 
             })
 });
 
+router.use('/:vacId/comments', commentRouter);
+router.use('/:vacId/todos', todoRouter);
 
 //middleware
 
@@ -148,7 +152,6 @@ function validateUserVacLink(req, res, next) {
     .catch(err => {
         res.status(500).json(err);
     });
-
 }
 
 module.exports = router;
