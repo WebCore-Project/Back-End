@@ -9,8 +9,9 @@ const todoRouter = require('../todos/todos-router.js');
 
 router.get('/', restricted, (req, res) => {
     const {username} = req.user;
-
+    console.log('username from token ',username)
     UsersVacation.findByName(username).then(vacs => {
+        console.log(vacs)
         res.status(200).json(vacs)
     })
     .catch(err => {

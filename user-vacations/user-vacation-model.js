@@ -10,8 +10,8 @@ module.exports = {
 
 function findByName(username) {
     return db('vacations as v')
-        .join('users as u', 'uv.user_id', 'u.id')
         .join('users_vacation as uv', 'uv.vacation_id', 'v.id')
+        .join('users as u', 'uv.user_id', 'u.id')
         .select('v.title', 'v.id as vacation_id', 'v.location', 'v.dates', 'v.description', 'uv.notes')
         .where({'u.username': username})
 }
