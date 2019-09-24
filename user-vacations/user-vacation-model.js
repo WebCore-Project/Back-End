@@ -18,8 +18,8 @@ function findByName(username) {
 
 function findByVacId(vacId) {
     return db('vacations as v')
-        .join('users as u', 'uv.user_id', 'u.id')
         .join('users_vacation as uv', 'uv.vacation_id', 'v.id')
+        .join('users as u', 'uv.user_id', 'u.id')
         .select('u.username', 'v.id as vacation_id', 'v.title', 'v.location', 'v.dates', 'v.description', 'uv.notes' )
         .where({'v.id': vacId})
 }
