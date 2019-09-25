@@ -11,7 +11,7 @@ module.exports = {
     migrations: {
       directory: './database/migrations',
     },
-    seeds: './database.seeds'
+    seeds: './database/seeds'
   },
   production: {
     client: 'pg',
@@ -19,6 +19,6 @@ module.exports = {
     migrations: {
       directory: './database/migrations',
     },
-    seeds: './database.seeds'
+    seeds: './database/seeds'
   },
 };
