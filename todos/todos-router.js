@@ -6,7 +6,8 @@ const Todos = require('./todos-model.js');
 
 router.post('/add', restricted, validateUserVacLink, (req, res) => {
     const { suggestion } = req.body;
-    const username = req.user
+    const {username} = req.user
+    console.log('req.vacId', req.vacId)
     if (!suggestion) {
         return res.status(400).json({ message: 'Suggestion required!' });
     }

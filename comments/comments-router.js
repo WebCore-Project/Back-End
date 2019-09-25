@@ -6,7 +6,7 @@ const Comments = require('./comments-model.js');
 
 router.post('/add', restricted, validateUserVacLink, (req, res) => {
     const { comment} = req.body;
-    const username = req.user;
+    const {username} = req.user;
     if (!comment) {
         return res.status(400).json({ message: 'Comment required!' });
     }
