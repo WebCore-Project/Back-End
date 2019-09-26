@@ -64,6 +64,7 @@ router.delete('/:vacId/delete', restricted, validateUserVacLink, (req, res) => {
     Vacations.remove(req.vacId).then(deleted => {
         res.status(200).json(deleted)
     }).catch(err => {
+        console.log(err)
         res.status(500).json({ error: "Error during deletion" })
     })
 })
