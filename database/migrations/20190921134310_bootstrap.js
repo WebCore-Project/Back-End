@@ -44,7 +44,7 @@ exports.up = function(knex) {
             .notNullable()
             .references('id')
             .inTable('vacations');
-        tbl.text('list', 5000).notNullable();
+        tbl.text('suggestion', 5000).notNullable();
         tbl.timestamps(true, true);
     })
     .createTable('vacation_comments', tbl => {
