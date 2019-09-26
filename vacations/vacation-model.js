@@ -25,8 +25,17 @@ function update(vacId, change) {
     return db('vacations').where({ 'id': vacId }).update(change)
 }
 
-async function remove(vacId) {
-    const deletedVac = await db('vacations').where({id: vacId} ).del();
-    const deletedLink = await db('users_vacation').where({ 'vacation_id': vacId }).del();
-    return deletedVac;
+function remove(vacId) {
+    // const deletedVac = await db('vacations').where({id: vacId}).del();
+    // const deletedLink = await db('users_vacation').where({ 'vacation_id': vacId }).del();
+    // return deletedVac;
+
+    return db('vacations').where({'id': vacId}).del().then(deleted => {
+        if(deleted) {
+            db('users_vacation').where({ 'vacation_id': vacId }).del();
+            return deleted;
+        } else {
+            return deleted;
+        }
+    })
 }
