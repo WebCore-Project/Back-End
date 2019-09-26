@@ -29,7 +29,8 @@ exports.up = function(knex) {
             .unsigned()
             .notNullable()
             .references('id')
-            .inTable('vacations');
+            .inTable('vacations')
+            .onDelete('CASCADE');
         tbl.text('notes', 1024);   
     })
     .createTable('todo', tbl => {
@@ -43,7 +44,8 @@ exports.up = function(knex) {
             .unsigned()
             .notNullable()
             .references('id')
-            .inTable('vacations');
+            .inTable('vacations')
+            .onDelete('CASCADE');
         tbl.text('suggestion', 5000).notNullable();
         tbl.timestamps(true, true);
     })
