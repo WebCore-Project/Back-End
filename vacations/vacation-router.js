@@ -60,6 +60,14 @@ router.post('/add', restricted, validateVacation, (req, res) => {
             });
 });
 
+router.delete('/:vacId/delete', restricted, validateUserVacLink, (req, res) => {
+    Vacations.remove(req.vacId).then(deleted => {
+        res.status(200).json(deleted)
+    }).catch(err => {
+        res.status(500).json({error: "Error during deletion"})
+    })
+})
+
 router.post('/:vacId/adduser', restricted, validateUserVacLink, (req, res) => {
     const {username} = req.body
     if(!username) {
@@ -67,14 +75,22 @@ router.post('/:vacId/adduser', restricted, validateUserVacLink, (req, res) => {
     }
     Users.findIdFromName(username).then(userId => {
         if(!userId) {
-            return res.status(400).json({Message: 'User with this username does not exist!'})
+            res.status(400).json({Message: 'User with this username does not exist!'})
         }
-        UsersVacation.add(userId, req.vacId).then(userVacID => {
-            res.status(201).json(userVacID)
-        })
-        .catch(err => {
-            console.log('err1', err)
-            res.status(500).json(err);
+        UsersVacation.check(userId, req.vacId).then(exists => {
+            if(exists){
+                res.status(400).json({message: 'User already added!'})
+            } else {
+                UsersVacation.add(userId, req.vacId).then(userVacID => {
+                    res.status(201).json(userVacID)
+                })
+                .catch(err => {
+                    console.log('err1', err)
+                    res.status(500).json(err);
+                })
+            }
+        }).catch(err => {
+            res.status(500).json(err)
         })
     })
     .catch(err => {
@@ -89,11 +105,16 @@ router.delete('/:vacId/deleteuser', restricted, validateUserVacLink, (req, res) 
         return res.status(400).json({message: 'Username is required!'})
     }
     Users.findIdFromName(username).then(userId => {
+        console.log('yserid',userId)
         if(!userId) {
-            return res.status(400).json({Message: 'User with this username does not exist!'})
+            return res.status(400).json({Message: 'User with this username is not on the vacation!'})
         }
         UsersVacation.remove(userId, req.vacId).then(deleted => {
-            res.status(200).json(deleted);
+            if(!deleted){
+                res.status(400).json({message: "This user is not on the vacation!"}); 
+            } else {
+                res.status(200).json(deleted);
+            }
         }).catch(err => {
             res.status(404).json({message: 'Invalid ID'})
         });

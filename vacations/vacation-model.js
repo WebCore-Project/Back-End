@@ -4,7 +4,8 @@ module.exports = {
     add,
     find,
     update,
-    findById
+    findById,
+    remove
 };
 
 function findById(id) {
@@ -22,4 +23,10 @@ function find(){
 
 function update(vacId, change) {
     return db('vacations').where({'id': vacId}).update(change)
+}
+
+async function remove(vacId) {
+    const deletedVac = await db('vacations').where({'id': vacId}).del();
+    const deletedLink = await db('users_vacation').where({'vacation_id': vacId}).del();
+    return deletedVac;
 }
