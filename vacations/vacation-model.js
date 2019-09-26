@@ -9,7 +9,7 @@ module.exports = {
 };
 
 function findById(id) {
-    return db('vacations').where({id}).first();
+    return db('vacations').where({ id }).first();
 }
 
 async function add(vac) {
@@ -17,16 +17,16 @@ async function add(vac) {
     return findById(id)
 };
 
-function find(){
+function find() {
     return db('vacations')
 }
 
 function update(vacId, change) {
-    return db('vacations').where({'id': vacId}).update(change)
+    return db('vacations').where({ 'id': vacId }).update(change)
 }
 
 async function remove(vacId) {
-    const deletedVac = await db('vacations').where({'id': vacId}).del();
-    const deletedLink = await db('users_vacation').where({'vacation_id': vacId}).del();
+    const deletedVac = await db('vacations').where({ 'id': vacId }).del();
+    const deletedLink = await db('users_vacation').where({ 'vacation_id': vacId }).del();
     return deletedVac;
 }

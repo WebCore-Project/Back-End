@@ -1,4 +1,4 @@
-const router = require('express').Router({mergeParams:true});
+const router = require('express').Router({ mergeParams: true });
 const Users = require('../users/users-model.js');
 const restricted = require('../auth/auth-middleware.js');
 const UsersVacation = require('../user-vacations/user-vacation-model.js')
@@ -6,7 +6,7 @@ const Todos = require('./todos-model.js');
 
 router.post('/add', restricted, validateUserVacLink, (req, res) => {
     const { suggestion } = req.body;
-    const {username} = req.user
+    const { username } = req.user
     console.log('req.vacId', req.vacId)
     if (!suggestion) {
         return res.status(400).json({ message: 'Suggestion required!' });
@@ -28,10 +28,10 @@ router.post('/add', restricted, validateUserVacLink, (req, res) => {
 
 router.get('/', restricted, validateUserVacLink, (req, res) => {
     Todos.find(req.vacId).then(todos => {
-        if(todos.length) {
+        if (todos.length) {
             res.status(200).json(todos)
         } else {
-            return res.status(400).json({message: 'No todos found!'})
+            return res.status(204).json({ message: 'No todos found!' })
         }
     })
         .catch(err => {

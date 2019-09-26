@@ -9,11 +9,17 @@ POST https://bw-vacation-planner.herokuapp.com/api/auth/register
 - unique username 
 - password
 
+**Example sending a request to register a new user**
+{  
+    "username" : "LordOfTheRings",
+    "password" : "youWillNeverFindMyPassWord!@#$%12"
+}
+
 ## Logs User In and Returns Login Token
 POST https://bw-vacation-planner.herokuapp.com/api/auth/login
 
 **Requirements:**
-- existing username 
+- existing username
 - password
 
 
@@ -26,8 +32,15 @@ POST https://bw-vacation-planner.herokuapp.com/api/vacations/add
 - title
 
 **Not-required:**
-- date
+- dates
 - description
+
+**Example sending a request to add a new vacation**
+{   "location": "Africa",
+    "title": "Summer Trip",
+    "dates": "July - August",
+    "description" : "Have fun!"
+}
 
 
 ## Returns list of vacations, for current user
@@ -51,6 +64,11 @@ POST https://bw-vacation-planner.herokuapp.com/api/vacations/:vacId/adduser
 - username to add
 - vacation id(vacId) in url
 
+**Example adding a user**
+{
+    "username": "blue"
+}
+
 ## Deletes user from vacation
 DELETE https://bw-vacation-planner.herokuapp.com/api/vacations/:vacId/deleteuser
 
@@ -58,6 +76,11 @@ DELETE https://bw-vacation-planner.herokuapp.com/api/vacations/:vacId/deleteuser
 - login token
 - username to delete
 - vacation id(vacId) in url
+
+**Example deleting a user**
+{
+    "username": "blue"
+}
 
 ## Updates vacation
 PUT https://bw-vacation-planner.herokuapp.com/api/vacations/:vacId/update
@@ -73,6 +96,15 @@ PUT https://bw-vacation-planner.herokuapp.com/api/vacations/:vacId/update
 - date
 - description
 
+**Example sending a request to update existing vacation**
+{   
+    "location": "Africa",
+    "title": "Summer Trip",
+    "dates": "July - August",
+    "description" : "Have fun!"
+}
+
+
 ## Returns a list of comments on the vacation
 GET https://bw-vacation-planner.herokuapp.com/api/vacations/:vacId/comments
 
@@ -87,6 +119,12 @@ POST https://bw-vacation-planner.herokuapp.com/api/vacations/:vacId/comments/add
 - login token
 - comment field
 - vacation id(vacId) in url
+
+**Example sending a request to add a new comment**
+{  
+    "comment" : "Lets go somewhere!"
+}
+
 
 ## Deletes comment with id from vacation with vacId
 DELETE https://bw-vacation-planner.herokuapp.com/api/vacations/:vacId/comments/:id/delete
@@ -111,6 +149,11 @@ POST https://bw-vacation-planner.herokuapp.com/api/vacations/:vacId/suggestions/
 - login token
 - suggestion field
 - vacation id(vacId) in url
+
+**Example sending a request to add a new suggestion**
+{  
+    "suggestion" : "Lets go somewhere!"
+}
 
 ## Deletes suggestion with id from vacation with vacId
 DELETE https://bw-vacation-planner.herokuapp.com/api/vacations/:vacId/suggestions/:id/delete
