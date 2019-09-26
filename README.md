@@ -11,7 +11,7 @@ POST https://bw-vacation-planner.herokuapp.com/api/auth/register
 
 **Example sending a request to register a new user**
 
-{  
+{   
     "username" : "LordOfTheRings",
     "password" : "youWillNeverFindMyPassWord!@#$%12"
 }
