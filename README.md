@@ -11,8 +11,7 @@ POST https://bw-vacation-planner.herokuapp.com/api/auth/register
 
 **Example sending a request to register a new user**
 
-{   
-    "username" : "LordOfTheRings",
+{   "username" : "LordOfTheRings",
     "password" : "youWillNeverFindMyPassWord!@#$%12"
 }
 
@@ -100,8 +99,7 @@ PUT https://bw-vacation-planner.herokuapp.com/api/vacations/:vacId/update
 
 **Example sending a request to update existing vacation**
 
-{   
-    "location": "Africa",
+{   "location": "Africa",
     "title": "Summer Trip",
     "dates": "July - August",
     "description" : "Have fun!"
@@ -125,8 +123,7 @@ POST https://bw-vacation-planner.herokuapp.com/api/vacations/:vacId/comments/add
 
 **Example sending a request to add a new comment**
 
-{  
-    "comment" : "Lets go somewhere!"
+{  "comment" : "Lets go somewhere!"
 }
 
 
@@ -156,8 +153,7 @@ POST https://bw-vacation-planner.herokuapp.com/api/vacations/:vacId/suggestions/
 
 **Example sending a request to add a new suggestion**
 
-{  
-    "suggestion" : "Lets go somewhere!"
+{  "suggestion" : "Lets go somewhere!"
 }
 
 ## Deletes suggestion with id from vacation with vacId
