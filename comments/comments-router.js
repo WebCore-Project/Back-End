@@ -31,7 +31,7 @@ router.get('/', restricted, validateUserVacLink, (req, res) => {
         if(comments.length) {
             res.status(200).json(comments)
         } else {
-            return res.status(400).json({message: 'No comments found!'})
+            return res.status(204).json({message: 'No comments found!'})
         }
     })
         .catch(err => {
