@@ -5,7 +5,8 @@ module.exports = {
     add,
     findByName,
     check,
-    remove
+    remove,
+    findById
 }
 
 function findByName(username) {
