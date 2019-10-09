@@ -15,7 +15,7 @@ router.post('/add', restricted, validateUserVacLink, (req, res) => {
             res.status(201).json(userVacID)
         })
             .catch(err => {
-                console.log('err1', err)
+                console.log('error adding comments in comment router', err)
                 res.status(500).json(err);
             })
     })
@@ -50,7 +50,8 @@ router.delete('/:id/delete', restricted, validateUserVacLink, validateCommentLin
 })
 
 
-//middleware
+//middlewares
+// function validates a user by matching username against the vacation_id
 function validateUserVacLink(req, res, next) {
     const { username } = req.user;
     const { vacId } = req.params;

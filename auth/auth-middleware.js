@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
             if(err) {
                 res.status(401).json(err);
             } else {
-                console.log(decodedToken)
+                console.log('decodedcode in auth-middleware',decodedToken)
                 req.user = { username: decodedToken.username };
                 next();
             }
