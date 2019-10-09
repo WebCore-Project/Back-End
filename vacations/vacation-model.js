@@ -33,7 +33,7 @@ function remove(vacId) {
     return db('vacations').where({'id': vacId}).del().then(deleted => {
         if(deleted) {
             db('users_vacation').where({ 'vacation_id': vacId }).del();
-            return deleted;
+            return vacId;
         } else {
             return deleted;
         }
