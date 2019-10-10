@@ -9,30 +9,32 @@ const todoRouter = require('../todos/todos-router.js');
 
 router.get('/', restricted, (req, res) => {
     const { username } = req.user;
-    console.log('username from token ', username)
     UsersVacation.findByName(username).then(vacs => {
-        console.log(vacs)
-        res.status(200).json(vacs)
+        res.status(200).json(vacs);
     })
         .catch(err => {
-            console.log(err)
+            console.log('error in vacation get',err);
+            res.status(500).json({error: 'error getting the vacations'})
         })
 });
+
 router.get('/:vacId', restricted, validateUserVacLink, (req, res) => {
 
     UsersVacation.findByVacId(req.vacId).then(vacs => {
-        let main = vacs[0]
+        let main = vacs[0];
         let usernames = vacs.map(each => {
             return each.username;
-        })
+        });
         main.users = usernames;
         delete main.username;
-        res.status(200).json(main)
+        res.status(200).json(main);
     })
         .catch(err => {
-            console.log(err)
-        })
+            console.log(err);
+            res.status(500).json({error: 'error getting individual vacation with the users'})
+        });
 });
+
 router.post('/add', restricted, validateVacation, (req, res) => {
     const vac = req.body;
     const { username } = req.user;
