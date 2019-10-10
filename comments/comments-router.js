@@ -77,18 +77,18 @@ function validateUserVacLink(req, res, next) {
             res.status(500).json(err);
         });
 }
-
+// function checking if a comment exists in the database
 function validateCommentLink(req, res, next) {
     const { id } = req.params;
     Comments.findById(id).then(comment => {
         if (!comment.length) {
-            return res.status(400).json({ message: 'Comment with this id does not exist' })
+            return res.status(400).json({ message: 'Comment with this id does not exist' });
         } else {
             next();
         }
     }).catch(err => {
-        console.log(err)
-        res.status(500).json({ err: 'Error finding comment' })
+        console.log('error in validateCommentLink', err);
+        res.status(500).json({ err: 'Error finding comment' });
     })
 
 }
